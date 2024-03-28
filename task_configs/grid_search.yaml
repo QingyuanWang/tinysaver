@@ -1,0 +1,5596 @@
+global:
+  exec: 'accelerate launch --num_processes NUM_PROC --main_process_port PORT --config_file ./accelerator_config.yaml main.py'
+  params: 
+    batch_size: 512
+    update_freq: 1
+    num_attn_layer: 2
+    ee_dim: 512 
+    lr: 6.25e-4
+    epochs: 10
+    warmup_epochs: 1
+    weight_decay: 0.05
+    mixup: 0.8
+    cutmix: 1.0
+    use_amp: True
+    model_ema: True
+    data_set: IMNET
+    num_workers: 20
+    prefetch_factor: 2
+    eval_interval: 0
+    gpuaug: True
+    dataloader: multiepoch
+    data_path: /ssd_storage/public/imagenet
+    output_dir: ./training/
+    record_dir: ./records/
+    job_index: search_10ep
+    force_refresh: False
+
+tasks:
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn0_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn1_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn2_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn3_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn0_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn1_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn2_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn3_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn0_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn1_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn2_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn3_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn0_d512_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn1_d512_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn2_d512_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_large
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: cn2l_IMNET1k_ep10_attn3_d512_eformerl
+    #     warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 0
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn0_d8_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 1
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn1_d8_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 2
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn2_d8_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 3
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn3_d8_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 0
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn0_d32_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 1
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn1_d32_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 2
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn2_d32_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 3
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn3_d32_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 0
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn0_d128_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 1
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn1_d128_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 2
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn2_d128_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 3
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn3_d128_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 0
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn0_d512_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 1
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn1_d512_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 2
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn2_d512_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: convnextv2_huge
+        batch_size: 256
+        update_freq: 2
+        num_attn_layer: 3
+        saver_model: efficientformerv2_l
+        sim_index: cn2h_IMNET1k_ep10_attn3_d512_eformerl
+        warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn0_d8_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn1_d8_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn2_d8_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn3_d8_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn0_d32_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn1_d32_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn2_d32_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn3_d32_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn0_d128_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn1_d128_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn2_d128_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn3_d128_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn0_d512_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn1_d512_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn2_d512_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet152
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_m2
+    #     sim_index: r152_IMNET1k_ep10_attn3_d512_evitm2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn0_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn1_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn2_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn3_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn0_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn1_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn2_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn3_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn0_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn1_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn2_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn3_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn0_d512_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn1_d512_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn2_d512_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_large
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: swinl_IMNET1k_ep10_attn3_d512_eformerl
+    #     warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 0
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn0_d8_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 1
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn1_d8_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 2
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn2_d8_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 3
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn3_d8_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 0
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn0_d32_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 1
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn1_d32_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 2
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn2_d32_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 3
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn3_d32_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 0
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn0_d128_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 1
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn1_d128_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 2
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn2_d128_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 3
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn3_d128_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 0
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn0_d512_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 1
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn1_d512_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 2
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn2_d512_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: maxvit_large
+        update_freq: 2
+        batch_size: 256
+        num_attn_layer: 3
+        saver_model: efficientformerv2_l
+        sim_index: maxvitl_IMNET1k_ep10_attn3_d512_eformerl
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 0
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn0_d8_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 1
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn1_d8_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 2
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn2_d8_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 3
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn3_d8_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 0
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn0_d32_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 1
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn1_d32_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 2
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn2_d32_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 3
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn3_d32_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 0
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn0_d128_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 1
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn1_d128_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 2
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn2_d128_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 3
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn3_d128_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 0
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn0_d512_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 1
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn1_d512_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 2
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn2_d512_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: davit_base
+        num_attn_layer: 3
+        saver_model: efficientformerv2_s2
+        sim_index: davitb_IMNET1k_ep10_attn3_d512_eformers2
+        warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn0_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn1_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn2_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn3_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn0_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn1_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn2_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn3_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn0_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn1_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn2_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn3_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn0_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn1_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn2_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_base
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: cn2b_IMNET1k_ep10_attn3_d512_eformers2
+    #     warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 0
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn0_d8_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 1
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn1_d8_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 2
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn2_d8_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 3
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn3_d8_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 0
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn0_d32_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 1
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn1_d32_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 2
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn2_d32_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 3
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn3_d32_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 0
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn0_d128_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 1
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn1_d128_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 2
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn2_d128_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 3
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn3_d128_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 0
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn0_d512_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 1
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn1_d512_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 2
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn2_d512_eformers2
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: swin_base
+        num_attn_layer: 3
+        saver_model: efficientformerv2_s2
+        sim_index: swinb_IMNET1k_ep10_attn3_d512_eformers2
+        warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn0_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn1_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn2_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn3_d8_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn0_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn1_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn2_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn3_d32_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn0_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn1_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn2_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn3_d128_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn0_d512_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn1_d512_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn2_d512_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_base
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_l
+    #     sim_index: maxvitb_IMNET1k_ep10_attn3_d512_eformerl
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn0_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn1_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn2_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn3_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn0_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn1_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn2_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn3_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn0_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn1_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn2_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn3_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn0_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn1_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn2_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: davit_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davits_IMNET1k_ep10_attn3_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn0_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn1_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn2_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn3_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn0_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn1_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn2_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn3_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn0_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn1_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn2_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn3_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn0_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn1_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn2_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: davit_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: davitt_IMNET1k_ep10_attn3_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_atto
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2a_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_femto
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2f_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_nano
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2n_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_pico
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: cn2p_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn0_d8_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn1_d8_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn2_d8_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn3_d8_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn0_d32_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn1_d32_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn2_d32_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn3_d32_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn0_d128_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn1_d128_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn2_d128_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn3_d128_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn0_d512_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn1_d512_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn2_d512_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: convnextv2_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b2
+    #     sim_index: cn2t_IMNET1k_ep10_attn3_d512_enetb2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn0_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn1_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn2_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn3_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn0_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn1_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn2_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn3_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn0_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn1_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn2_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn3_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn0_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn1_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn2_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet50
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: r50_IMNET1k_ep10_attn3_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn0_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn1_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn2_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn3_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn0_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn1_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn2_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn3_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn0_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn1_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn2_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn3_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn0_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn1_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn2_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet101
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: r101_IMNET1k_ep10_attn3_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn0_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn1_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn2_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn3_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn0_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn1_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn2_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn3_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn0_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn1_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn2_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn3_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn0_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn1_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn2_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet34
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r34_IMNET1k_ep10_attn3_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn0_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn1_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn2_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn3_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn0_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn1_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn2_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn3_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn0_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn1_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn2_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn3_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn0_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn1_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn2_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: resnet18
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: r18_IMNET1k_ep10_attn3_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn0_d8_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn1_d8_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn2_d8_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn3_d8_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn0_d32_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn1_d32_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn2_d32_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn3_d32_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn0_d128_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn1_d128_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn2_d128_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn3_d128_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn0_d512_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn1_d512_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn2_d512_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b3
+    #     sim_index: swins_IMNET1k_ep10_attn3_d512_enetb3
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn0_d8_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn1_d8_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn2_d8_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn3_d8_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn0_d32_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn1_d32_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn2_d32_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn3_d32_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn0_d128_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn1_d128_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn2_d128_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn3_d128_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn0_d512_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn1_d512_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn2_d512_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: swin_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b0
+    #     sim_index: swint_IMNET1k_ep10_attn3_d512_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn0_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn1_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn2_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn3_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn0_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn1_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn2_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn3_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn0_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn1_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn2_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn3_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn0_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn1_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn2_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_small
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvits_IMNET1k_ep10_attn3_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn0_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn1_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn2_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn3_d8_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn0_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn1_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn2_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn3_d32_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn0_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn1_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn2_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn3_d128_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 0
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn0_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 1
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn1_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 2
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn2_d512_eformers2
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: maxvit_tiny
+    #     num_attn_layer: 3
+    #     saver_model: efficientformerv2_s2
+    #     sim_index: maxvitt_IMNET1k_ep10_attn3_d512_eformers2
+    #     warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 0
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn0_d8_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 1
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn1_d8_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 2
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn2_d8_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 3
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn3_d8_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 0
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn0_d32_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 1
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn1_d32_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 2
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn2_d32_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 3
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn3_d32_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 0
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn0_d128_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 1
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn1_d128_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 2
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn2_d128_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 3
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn3_d128_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 0
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn0_d512_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 1
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn1_d512_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 2
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn2_d512_mnetv3s100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: mobilenetv3_large_100
+        num_attn_layer: 3
+        saver_model: mobilenetv3_small_100
+        sim_index: mnetv3l100_IMNET1k_ep10_attn3_d512_mnetv3s100
+        warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn0_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn1_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn2_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn3_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn0_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn1_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn2_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn3_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn0_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn1_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn2_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn3_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn0_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn1_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn2_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b0
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb0_IMNET1k_ep10_attn3_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn0_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn1_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn2_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn3_d8_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn0_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn1_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn2_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn3_d32_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn0_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn1_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn2_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn3_d128_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 0
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn0_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 1
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn1_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 2
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn2_d512_evitb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b1
+    #     num_attn_layer: 3
+    #     saver_model: efficientvit_b0
+    #     sim_index: enetb1_IMNET1k_ep10_attn3_d512_evitb0
+    #     warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 0
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn0_d8_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 1
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn1_d8_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 2
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn2_d8_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 3
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn3_d8_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 0
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn0_d32_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 1
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn1_d32_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 2
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn2_d32_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 3
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn3_d32_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 0
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn0_d128_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 1
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn1_d128_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 2
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn2_d128_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 3
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn3_d128_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 0
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn0_d512_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 1
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn1_d512_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 2
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn2_d512_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientnet_b2
+        num_attn_layer: 3
+        saver_model: mobilenetv3_large_100
+        sim_index: enetb2_IMNET1k_ep10_attn3_d512_mnetv3l100
+        warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b3
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb3_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientnet_b4
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: enetb4_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn0_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn1_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn2_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn3_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn0_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn1_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn2_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn3_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn0_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn1_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn2_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn3_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn0_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn1_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn2_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm1_IMNET1k_ep10_attn3_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn0_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn1_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn2_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn3_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn0_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn1_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn2_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn3_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn0_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn1_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn2_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn3_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn0_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn1_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn2_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm2_IMNET1k_ep10_attn3_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn0_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn1_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn2_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn3_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn0_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn1_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn2_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn3_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn0_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn1_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn2_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn3_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn0_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn1_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn2_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m3
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm3_IMNET1k_ep10_attn3_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn0_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn1_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn2_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn3_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn0_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn1_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn2_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn3_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn0_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn1_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn2_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn3_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn0_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn1_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn2_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_m4
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitm4_IMNET1k_ep10_attn3_d512_mnetv3s100
+    #     warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 0
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn0_d8_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 1
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn1_d8_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 2
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn2_d8_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 3
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn3_d8_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 0
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn0_d32_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 1
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn1_d32_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 2
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn2_d32_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 3
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn3_d32_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 0
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn0_d128_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 1
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn1_d128_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 2
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn2_d128_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 3
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn3_d128_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 0
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn0_d512_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 1
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn1_d512_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 2
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn2_d512_mnetv3l100
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientvit_m5
+        num_attn_layer: 3
+        saver_model: mobilenetv3_large_100
+        sim_index: evitm5_IMNET1k_ep10_attn3_d512_mnetv3l100
+        warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn0_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn1_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn2_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn3_d8_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn0_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn1_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn2_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn3_d32_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn0_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn1_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn2_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn3_d128_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn0_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn1_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn2_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b0
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_small_100
+    #     sim_index: evitb0_IMNET1k_ep10_attn3_d512_mnetv3s100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb1_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: evitb2_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn0_d8_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn1_d8_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn2_d8_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn3_d8_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn0_d32_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn1_d32_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn2_d32_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn3_d32_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn0_d128_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn1_d128_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn2_d128_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn3_d128_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 0
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn0_d512_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 1
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn1_d512_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 2
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn2_d512_enetb0
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientvit_b3
+    #     num_attn_layer: 3
+    #     saver_model: efficientnet_b0
+    #     sim_index: evitb3_IMNET1k_ep10_attn3_d512_enetb0
+    #     warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 0
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn0_d8_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 1
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn1_d8_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 2
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn2_d8_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 8
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 3
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn3_d8_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 0
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn0_d32_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 1
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn1_d32_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 2
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn2_d32_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 32
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 3
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn3_d32_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 0
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn0_d128_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 1
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn1_d128_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 2
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn2_d128_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 128
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 3
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn3_d128_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 0
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn0_d512_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 1
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn1_d512_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 2
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn2_d512_evitb0
+        warmup_epochs: 1
+    - params:
+        ee_dim: 512
+        epoch: 10
+        model: efficientformerv2_s0
+        num_attn_layer: 3
+        saver_model: efficientvit_b0
+        sim_index: eformers0_IMNET1k_ep10_attn3_d512_evitb0
+        warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_s1
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers1_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_s2
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformers2_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn0_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn1_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn2_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 8
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn3_d8_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn0_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn1_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn2_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 32
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn3_d32_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn0_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn1_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn2_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 128
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn3_d128_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 0
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn0_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 1
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn1_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 2
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn2_d512_mnetv3l100
+    #     warmup_epochs: 1
+    # - params:
+    #     ee_dim: 512
+    #     epoch: 10
+    #     model: efficientformerv2_l
+    #     num_attn_layer: 3
+    #     saver_model: mobilenetv3_large_100
+    #     sim_index: eformerl_IMNET1k_ep10_attn3_d512_mnetv3l100
+    #     warmup_epochs: 1

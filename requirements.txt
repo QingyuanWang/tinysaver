@@ -1,0 +1,9 @@
+timm==0.9.12
+accelerate==0.25.0
+deepspeed==0.12.4
+torch
+tensorboardX
+pyyaml
+scipy
+matplotlib
+pandas
