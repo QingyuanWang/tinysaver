@@ -21,7 +21,7 @@ pip install -r requirements.txt
 Set path to imagenet
 
 ```
-PATH_TO_IMAGENET=/ssd_storage/public/imagenet
+PATH_TO_IMAGENET=/dataset/imagenet
 ```
 
 Run
@@ -32,11 +32,11 @@ python exit_estimation.py --data_path $PATH_TO_IMAGENET --dataset_split test
 python evaluation.py --mode single
 ```
 
-Then the infomation of which saver is the best is stored in `TinySaver/records/best_saver_info_train.csv`. The complexity/accuracy info for each base/saver pair is store in `TinySaver/eval/sim_results/$BASE_IMNET1k_$SAVER_single_test.csv`
+Then the infomation of which saver is the best is stored in `./records/best_saver_info_train.csv`. The complexity/accuracy info for each base/saver pair is store in `./eval/sim_results/$BASE_IMNET1k_$SAVER_single_test.csv`
 
 ### Training ESN
 
-Edit `TinySaver/task_configs/grid_search.yaml` for `data_path` and each expriment entry
+Edit `./task_configs/grid_search.yaml` for `data_path` and each expriment entry
 
 Run
 
@@ -48,4 +48,4 @@ python evaluation.py --mode dyce
 `--tasks_in_parallel` refers how many training to run in parallel
 `--gpu_per_task` refers how many gpus to use for every training
 If your machine is experiencing out-of-memory error, please consider decrease `batch_size` and increase `update_freq` at the same rate.
-Results is sotred in `TinySaver/eval/sim_results/`
+Results is sotred in `./eval/sim_results/`
